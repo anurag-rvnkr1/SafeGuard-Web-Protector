@@ -2,8 +2,8 @@
 class SafeGuardService {
   constructor() {
     // Replace with your actual API keys
-    this.googleSafeBrowsingApiKey = "AIzaSyDbGbYKExCSkYQjCiO5c5eFhX-RtJcuuz4"
-    this.virusTotalApiKey = "13ca5739c082556ea7d03f1eb2f66e6853b8d7de283da65c3956daf9e5ccaebb" // Add your VirusTotal API key
+    this.googleSafeBrowsingApiKey = "YOUR_API_KEY" // ADD your GOOGLE SAVE BROWSING API KEY
+    this.virusTotalApiKey = "YOUR_API_KEY" // Add your VirusTotal API key
 
     this.googleSafeBrowsingUrl = `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${this.googleSafeBrowsingApiKey}`
     this.virusTotalUrl = "https://www.virustotal.com/vtapi/v2/url/report"

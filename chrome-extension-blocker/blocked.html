@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Blocked - SafeGuard</title>
+    <link rel="stylesheet" href="blocked.css">
+</head>
+<body>
+    <div class="container">
+        <div class="warning-icon">⚠️</div>
+        <h1 id="blockTitle">Access Blocked</h1>
+        <div class="block-info">
+            <p id="blockMessage">This website has been blocked for your safety.</p>
+            <div class="url-info">
+                <strong>Blocked URL:</strong>
+                <span id="blockedUrl"></span>
+            </div>
+            <div class="reason-info">
+                <strong>Reason:</strong>
+                <span id="blockReason"></span>
+            </div>
+            <div class="timestamp">
+                <strong>Blocked at:</strong>
+                <span id="blockTime"></span>
+            </div>
+            <div class="detection-source" id="detectionSource" style="display: none;">
+                <strong>Detected by:</strong>
+                <span id="detectionSourceText"></span>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button id="goBack" class="btn btn-primary">Go Back</button>
+            <button id="newTab" class="btn btn-secondary">Open New Tab</button>
+            <button id="continueAnyway" class="btn btn-danger">Continue Anyway</button>
+            <button id="reportSite" class="btn btn-warning">🚨 Report This Site</button>
+        </div>
+
+        <div class="details" id="detailsSection">
+            <h3>Why was this blocked?</h3>
+            <div id="detailsContent"></div>
+            <div id="childModeNotice" style="display: none;">
+                <p><strong>Child Mode is active:</strong></p>
+                <p>This content has been blocked to ensure a safe browsing environment. To access this type of content, Child Mode must be disabled in the extension settings.</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Protected by SafeGuard Web Protector</p>
+            <p class="api-info">🛡️ Dual API Protection: Google Safe Browsing + VirusTotal</p>
+            <button id="reportFalsePositive" class="link-btn">Report False Positive</button>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div id="reportModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🚨 Report Malicious Site</h2>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p><strong>URL:</strong> <span id="reportUrl"></span></p>
+                <label for="reportReason">Why is this site malicious?</label>
+                <select id="reportReason">
+                    <option value="phishing">Phishing - Tries to steal personal information</option>
+                    <option value="malware">Malware - Contains harmful software</option>
+                    <option value="scam">Scam - Fraudulent or deceptive content</option>
+                    <option value="fake">Fake - Impersonates legitimate sites</option>
+                    <option value="other">Other malicious activity</option>
+                </select>
+                <textarea id="reportDetails" placeholder="Additional details (optional)..."></textarea>
+                <div class="api-note">
+                    <small>💡 This site was not detected by our dual API protection (Google Safe Browsing + VirusTotal). Your report helps improve security for everyone.</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="submitReport" class="btn btn-danger">Submit Report</button>
+                <button id="cancelReport" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="blocked.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeGuard Settings</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header class="popup-header">
+            <div class="logo">🛡️</div>
+            <h1>SafeGuard</h1>
+            <div class="status" id="statusIndicator">
+                <span class="status-dot active"></span>
+                <span>Active</span>
+            </div>
+        </header>
+
+        <div class="api-status" id="apiStatus">
+            <div class="api-item">
+                <span class="api-name">Google Safe Browsing</span>
+                <span class="api-status-dot" id="googleStatus">●</span>
+            </div>
+            <div class="api-item">
+                <span class="api-name">VirusTotal</span>
+                <span class="api-status-dot" id="virusTotalStatus">●</span>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h3>Web Protection</h3>
+                    <p>Block malicious and phishing websites</p>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="protectionEnabled">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h3>Child Mode</h3>
+                    <p>Block inappropriate content for users under 18</p>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="childMode">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h3>Protection Stats</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="blockedToday">0</div>
+                    <div class="stat-label">Blocked Today</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalBlocked">0</div>
+                    <div class="stat-label">Total Blocked</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions-section">
+            <button id="viewWhitelist" class="btn btn-secondary">
+                📋 View Whitelist
+            </button>
+            <button id="viewHistory" class="btn btn-secondary">
+                📊 View Block History
+            </button>
+            <button id="viewReported" class="btn btn-warning">
+                🚨 Reported Sites
+            </button>
+        </div>
+
+        <footer class="popup-footer">
+            <p>Version 1.0.0 - Dual API Protection</p>
+            <a href="#" id="helpLink">Help & Support</a>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

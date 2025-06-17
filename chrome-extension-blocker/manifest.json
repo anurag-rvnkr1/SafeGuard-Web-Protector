@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "SafeGuard Web Protector",
+  "version": "1.0.0",
+  "description": "Advanced web protection with ML-powered malicious URL detection and child safety mode",
+  "permissions": ["activeTab", "storage", "tabs", "webNavigation", "declarativeNetRequest"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "SafeGuard Settings"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked.html", "blocked.css", "blocked.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeGuard Whitelist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .whitelist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+        }
+
+        .domain {
+            font-weight: 500;
+            color: #333;
+            font-family: monospace;
+            font-size: 1rem;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c0392b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .back-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Whitelisted Domains</h1>
+            <p>Domains that are allowed to bypass SafeGuard protection</p>
+        </div>
+        <div class="content">
+            <button id="backBtn" class="back-btn">← Back to Extension</button>
+            <div id="whitelistContainer">
+                <div class="empty-state">
+                    <h3>Loading whitelist...</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadWhitelist();
+            
+            document.getElementById('backBtn').addEventListener('click', () => {
+                window.close();
+            });
+        });
+
+        async function loadWhitelist() {
+            try {
+                const result = await chrome.storage.local.get({ whitelist: [] });
+                const whitelist = result.whitelist;
+                const container = document.getElementById('whitelistContainer');
+
+                if (whitelist.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <h3>No whitelisted domains</h3>
+                            <p>Domains you choose to continue accessing will appear here.</p>
+                            <p>When you encounter a blocked site and choose "Continue Anyway", it will be added to this list.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = whitelist.map(domain => `
+                    <div class="whitelist-item">
+                        <span class="domain">${domain}</span>
+                        <button class="remove-btn" onclick="removeDomain('${domain}')">Remove</button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading whitelist:', error);
+                document.getElementById('whitelistContainer').innerHTML = `
+                    <div class="empty-state">
+                        <h3>Error loading whitelist</h3>
+                        <p>Please try refreshing the page.</p>
+                    </div>
+                `;
+            }
+        }
+
+        async function removeDomain(domain) {
+            if (confirm(`Remove ${domain} from whitelist?\n\nThis domain will be subject to blocking again.`)) {
+                try {
+                    const result = await chrome.storage.local.get({ whitelist: [] });
+                    const whitelist = result.whitelist.filter(d => d !== domain);
+                    await chrome.storage.local.set({ whitelist });
+                    loadWhitelist();
+                } catch (error) {
+                    console.error('Error removing domain:', error);
+                    alert('Error removing domain. Please try again.');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

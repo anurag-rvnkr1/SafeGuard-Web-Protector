@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Smooth fade-in for elements */
+  .fade-in {
+    @apply transition-opacity duration-500 ease-out opacity-0;
+  }
+  .fade-in.show {
+    @apply opacity-100;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+  }
+}
+
+/* Base Colors and Variables */
+@layer base {
+  :root {
+    /* Light mode vibrant palette */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 221 83% 53%;          /* Bright blue */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 267 85% 67%;        /* Purple accent */
+    --secondary-foreground: 0 0% 100%;
+    --accent: 14 100% 57%;           /* Vibrant orange */
+    --accent-foreground: 0 0% 100%;
+    --muted: 220 14% 90%;
+    --muted-foreground: 220 14% 40%;
+    --destructive: 0 72% 51%;        /* Strong red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 20% 80%;
+    --input: 215 20% 85%;
+    --ring: 221 83% 53%;
+
+    /* Chart colors */
+    --chart-1: 199 89% 48%;
+    --chart-2: 150 78% 46%;
+    --chart-3: 43 96% 56%;
+    --chart-4: 12 94% 62%;
+    --chart-5: 291 72% 63%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 22% 90%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 215 20% 80%;
+    --sidebar-ring: 221 83% 53%;
+  }
+
+  .dark {
+    /* Dark mode vibrant palette */
+    --background: 222 47% 11%;      /* Near black */
+    --foreground: 210 40% 98%;
+    --card: 222 47% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 199 89% 58%;          /* Vibrant cyan */
+    --primary-foreground: 222 47% 11%;
+    --secondary: 291 72% 63%;        /* Electric purple */
+    --secondary-foreground: 222 47% 11%;
+    --accent: 43 96% 56%;            /* Bright yellow */
+    --accent-foreground: 222 47% 11%;
+    --muted: 222 15% 25%;
+    --muted-foreground: 222 14% 70%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 222 47% 11%;
+
+    --border: 222 20% 25%;
+    --input: 222 20% 25%;
+    --ring: 199 89% 58%;
+
+    /* Chart colors for dark mode */
+    --chart-1: 199 89% 58%;
+    --chart-2: 150 78% 52%;
+    --chart-3: 43 96% 56%;
+    --chart-4: 14 94% 62%;
+    --chart-5: 291 72% 63%;
+
+    --sidebar-background: 222 47% 15%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 199 89% 58%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 222 47% 20%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 222 47% 20%;
+    --sidebar-ring: 199 89% 58%;
+  }
+
+  * {
+    @apply border-border transition-colors duration-300 ease-in-out;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-500 ease-in-out;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  a {
+    @apply text-primary hover:text-accent transition-colors duration-300 ease-in-out;
+  }
+
+  button {
+    @apply hover-lift;
+  }
+}

@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /.venv313
-
+/chrome-extension
 # next.js
 /.next/
 /out/

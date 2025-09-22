@@ -98,8 +98,8 @@ Ensure you have the following installed:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/safeguard-web-protector.git
-   cd safeguard-web-protector
+   git clone https://github.com/anurag-rvnkr1/SafeGuard-Web-Protector.git
+   cd SafeGuard-Web-Protector
    ```
 
 2. **Create Virtual Environment**
